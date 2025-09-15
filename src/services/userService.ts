@@ -1,9 +1,12 @@
-import prisma from "../config/database";
+import prisma from "../config/database.js"; // Adicione o .js
 import bcrypt from "bcrypt";
 
-export async function registerUser(name: string, email: string, password: string, userType: string) {
+// Mude o parâmetro 'userType' para 'isCuidador'
+export async function registerUser(name: string, email: string, password: string, isCuidador: boolean) { 
   const hashedPassword = await bcrypt.hash(password, 10);
-  const isCuidador = userType === "Cuidador";
+  
+  // A lógica de 'userType' não é mais necessária, use 'isCuidador' diretamente
+  // const isCuidador = userType === "Cuidador";
 
   return prisma.user.create({
     data: {
